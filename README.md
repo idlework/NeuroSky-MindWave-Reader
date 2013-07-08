@@ -21,16 +21,16 @@ private function _updateHandler(event:NeuroSkyEvent):void
 }
 ```
 
-When the connection is made the trace will show:
-signalLevel: 0
-blinkStrength: 91
-delta: 2086924
-theta: 606761
-alpha.low: 90391
-alpha.high: 171140
-beta.low: 96183
-beta.high: 216451
-gamma.low: 109903
+When the connection is made the trace will result in:
+signalLevel: 0,
+blinkStrength: 91,
+delta: 2086924,
+theta: 606761,
+alpha.low: 90391,
+alpha.high: 171140,
+beta.low: 96183,
+beta.high: 216451,
+gamma.low: 109903,
 gamma.high: 29423
 
 SignalLevel 200 means no signal from the NeuroSky MindWave and signalLevel 0 means we have a connection with the Neurosky MindWave.
