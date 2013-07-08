@@ -1,7 +1,7 @@
 NeuroSky-MindWave-Reader
 ========================
 
-With this small library you are able to read out the MindWave. All possible data from the Neurosky Mindwave is accessible with this library.
+With this small library you are able to read out the MindWave. All possible data from the Neurosky Mindwave is accessible with this library. The library also gives the option for json parsing or binary parsing 
 
 Example
 =======
