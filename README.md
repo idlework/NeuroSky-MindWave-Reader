@@ -1,7 +1,12 @@
 NeuroSky-MindWave-Reader
 ========================
 
-With this small library you are able to read out the MindWave. All possible data from the Neurosky Mindwave is accessible with this library. The library also gives the option for json parsing or binary parsing 
+With this small library you are able to read out the Neurosky MindWave. All possible data from the Neurosky Mindwave is accessible with this library. The library also gives the option for json parsing or binary parsing.
+
+Dependencies
+============
+- Adobe Flash Player 9 or Adobe Air
+- Thinkgear: http://developer.neurosky.com/docs/doku.php?id=thinkgear_connector_tgc
 
 Example
 =======
