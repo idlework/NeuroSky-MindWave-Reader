@@ -39,8 +39,3 @@ gamma.low: 109903,
 gamma.high: 29423
 
 SignalLevel 200 means no signal from the NeuroSky MindWave and signalLevel 0 means we have a connection with the Neurosky MindWave.
-
-To do
-=====
-
-Add an example application to the repository.
