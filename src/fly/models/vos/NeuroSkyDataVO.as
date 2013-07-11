@@ -21,6 +21,8 @@ package fly.models.vos
 		{
 			return 	"signalLevel: " + signalLevel + ", " +
 					"blinkStrength: " + blinkStrength + ", " +
+					"attention: " + attention + ", " +
+					"meditation: " + meditation + ", " +
 					"delta: " + delta + ", " +
 					"theta: " + theta + ", " +
 					"alpha.low: " + alphaLow + ", " +
