@@ -40,8 +40,8 @@ package fly.controllers
 			var entry:Object;
 			
 			for each (var packet:String in packets)
-			{        
-				if(packet.length)
+			{   
+				try
 				{
 					entry = JSON.parse(packet);
 					
@@ -70,6 +70,9 @@ package fly.controllers
 					{
 						_vo.blinkStrength = entry["blinkStrength"];
 					}
+				} catch(error:Error)
+				{
+//					trace("No valid JSON");
 				}
 				
 				entry = null;

@@ -9,9 +9,9 @@ package fly.services
 	import flash.utils.Endian;
 	
 	import fly.constants.NeuroSkyReaderDataTypes;
+	import fly.controllers.NeuroSkyDataParser;
 	import fly.events.NeuroSkyEvent;
 	import fly.models.vos.NeuroSkyDataVO;
-	import fly.controllers.NeuroSkyDataParser;
 	
 	[Event(name=NeuroSkyEvent.UPDATE, type="fly.events.NeuroSkyEvent")]
 	
@@ -123,6 +123,11 @@ package fly.services
 		{
 			close();
 			_removeEventListeners();
+		}
+		
+		public function get data():NeuroSkyDataVO
+		{
+			return _data;
 		}
 	}
 }
