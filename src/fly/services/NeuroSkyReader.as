@@ -13,7 +13,7 @@ package fly.services
 	import fly.events.NeuroSkyEvent;
 	import fly.models.vos.NeuroSkyDataVO;
 	
-	[Event(name=NeuroSkyEvent.UPDATE, type="fly.events.NeuroSkyEvent")]
+	[Event(name="neuroskyEventUpdate", type="fly.events.NeuroSkyEvent")]
 	
 	public class NeuroSkyReader extends Socket
 	{
@@ -33,6 +33,7 @@ package fly.services
 			_port = port;
 			_format = format;
 			_enableRawOutput = enableRawOutput;
+			_data = new NeuroSkyDataVO;
 			
 			if(_format != NeuroSkyReaderDataTypes.BINARY && _format != NeuroSkyReaderDataTypes.JSON)
 			{
@@ -40,32 +41,32 @@ package fly.services
 			}
 		}
 		
-		private function _createEventListeners():void
+		protected function createEventListeners():void
 		{
-			addEventListener(ProgressEvent.SOCKET_DATA, _socketDataHandler);
-			addEventListener(IOErrorEvent.IO_ERROR, _errorHandler);
-			addEventListener(SecurityErrorEvent.SECURITY_ERROR, _errorHandler);
+			addEventListener(ProgressEvent.SOCKET_DATA, socketDataHandler);
+			addEventListener(IOErrorEvent.IO_ERROR, errorHandler);
+			addEventListener(SecurityErrorEvent.SECURITY_ERROR, errorHandler);
 		}
 		
-		private function _removeEventListeners():void
+		protected function removeEventListeners():void
 		{
-			removeEventListener(ProgressEvent.SOCKET_DATA, _socketDataHandler);
-			removeEventListener(IOErrorEvent.IO_ERROR, _errorHandler);
-			removeEventListener(SecurityErrorEvent.SECURITY_ERROR, _errorHandler);
+			removeEventListener(ProgressEvent.SOCKET_DATA, socketDataHandler);
+			removeEventListener(IOErrorEvent.IO_ERROR, errorHandler);
+			removeEventListener(SecurityErrorEvent.SECURITY_ERROR, errorHandler);
 		}
 		
-		private function _socketDataHandler(event:ProgressEvent):void
+		protected function socketDataHandler(event:ProgressEvent):void
 		{
 			switch (_format)
 			{
 				case NeuroSkyReaderDataTypes.JSON:
 				{
-					_parseDataJson();
+					parseDataJson();
 					break;
 				}
 				case NeuroSkyReaderDataTypes.BINARY:
 				{
-					_parseDataBinary();
+					parseDataBinary();
 					break;
 				}
 			}
@@ -75,17 +76,17 @@ package fly.services
 			dispatchUpdateEvent();
 		}
 		
-		private function _errorHandler(event:Event):void
+		protected function errorHandler(event:Event):void
 		{
 			trace(event.type);
 		}
 		
-		private function _parseDataJson():void
+		protected function parseDataJson():void
 		{
 			_data = NeuroSkyDataParser.json(readUTFBytes(bytesAvailable));
 		}
 		
-		private function _parseDataBinary():void
+		protected function parseDataBinary():void
 		{
 			var ba:ByteArray = new ByteArray();
 			ba.position = 1;
@@ -96,14 +97,14 @@ package fly.services
 			_data = NeuroSkyDataParser.binary(ba);
 		}
 		
-		private function dispatchUpdateEvent():void
+		protected function dispatchUpdateEvent():void
 		{
 			var event:NeuroSkyEvent = new NeuroSkyEvent(NeuroSkyEvent.UPDATE);
 			event.data = _data;
 			dispatchEvent(event);
 		}
 		
-		private function _setConfiguration():void
+		protected function setConfiguration():void
 		{
 			var configuration : Object = new Object( );
 			configuration["enableRawOutput"] = _enableRawOutput;
@@ -114,15 +115,15 @@ package fly.services
 		
 		public function start():void
 		{
-			_createEventListeners();
+			createEventListeners();
 			connect(_host, _port);
-			_setConfiguration();
+			setConfiguration();
 		}
 		
 		public function stop():void
 		{
 			close();
-			_removeEventListeners();
+			removeEventListeners();
 		}
 		
 		public function get data():NeuroSkyDataVO

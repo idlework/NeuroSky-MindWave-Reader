@@ -2,7 +2,7 @@ package fly.models.vos
 {
 	public class NeuroSkyDataVO
 	{
-		public var signalLevel:int;
+		public var signalLevel:int = 200;
 		public var blinkStrength:int;
 		
 		public var attention:int;
